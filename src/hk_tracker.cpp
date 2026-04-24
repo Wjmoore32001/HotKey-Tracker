@@ -47,3 +47,7 @@ vector<string> load_table_of_contents() {
   }
   return table_of_contents_vector;
 }
+
+void main_menu(vector<string> toc_vector) {
+  //
+}

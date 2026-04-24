@@ -1,5 +1,4 @@
 #include "hk_tracker.hpp"
-#include <iostream>
 using namespace std;
 
 int main() {
@@ -11,4 +10,7 @@ int main() {
   } else {
     toc_vector = load_table_of_contents();
   }
+  // call a menu
+  // picking from table of contents
+  main_menu(toc_vector);
 }

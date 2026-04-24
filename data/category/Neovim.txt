@@ -1,0 +1,11 @@
+---
+NeoTree
+---
+Show Hidden Files 
+shift (hold)+ h (H)
+
+---
+Spell Check
+---
+Add to Dictionary
+z + g
