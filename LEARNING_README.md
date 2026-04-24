@@ -52,7 +52,7 @@ To make this possible, I needed a way to create files, read files, and write dat
 
 - This library allows you to work with files in C++.
 - To use the `fstream` library in this project, I also need to include `iostream`.
-- `fstream` is closely related to:
+- `fstream` actually includes/is a combination of two other libraries as well:
   - `ofstream` → creates and writes to files
   - `ifstream` → reads from files
 
@@ -85,6 +85,25 @@ ofstream MyFile("filename.txt", ios::app);
 - The third line showcases how you can reference a file that already exists **without wiping its contents**.
 
   - `app` is a constant in the input/output stream namespace that acts as a flag meaning `"append"`.
+
+#### Syntax (Write To a File)
+
+```cpp
+ofstream MyFile("filename.txt");
+
+MyFile << "Writing to the file";
+MyFile.close();
+```
+
+- As stated before, the first line creates the actual text file and gives you a way to reference it.
+
+- The second line is what actually writes data to the text file.
+
+- It’s important to understand that when you are editing a file (generally with most methods), you are usually writing to a buffer in memory first.
+
+  - A secondary process happens when you save or close the file, where that buffered data gets written to the disk itself.
+
+- The third line takes that buffered data, saves it to the disk, and closes the buffer that was being used to write.
 
 ---
 

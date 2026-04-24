@@ -1,0 +1,9 @@
+# Build output
+build/
+
+# Compiled binaries
+*.exe
+*.out
+
+# Object files
+*.o
