@@ -1,5 +1,3 @@
-#include "hk_tracker.h"
+#include "hk_tracker.hpp"
 
-int main() {
-  //
-}
+int main() { initiate_table_of_contents(); }
