@@ -1,10 +1,9 @@
----
+___
 NeoTree
 ---
-Show Hidden Files 
+Show Hidden Files
 shift (hold)+ h (H)
-
----
+___
 Spell Check
 ---
 Add to Dictionary
