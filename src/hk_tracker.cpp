@@ -30,14 +30,14 @@ bool initiate_table_of_contents() {
   }
   if (if_toc_file) {
     if_toc_file.close();
-    cout << "Table of Contents Found\n";
+    cout << "\nTable of Contents Found\n";
     return true;
   }
   return false;
 }
 
 vector<string> load_table_of_contents() {
-  cout << "Table of Contents: \n";
+  cout << "\nTable of Contents: \n";
 
   vector<string> table_of_contents_vector;
   string table_of_contents_path = "data/table_of_contents.txt";
@@ -51,9 +51,8 @@ vector<string> load_table_of_contents() {
 
 bool main_menu(vector<string> toc_vector) {
   display_toc(toc_vector);
-  cout << "Enter a Number to open a Category\n "
-       << "or\n"
-       << "Press 0 to Exit Program" << endl;
+  cout << "\n1-x[open a category] || "
+       << "0[exit program] || ";
   int choice;
   cout << "Choice: ";
   cin >> choice;
@@ -124,8 +123,7 @@ bool category_viewer(string category) {
       }
       if (subcategory_flag == true && line != "---") {
         subcategory_name = line;
-        line = to_string(current_subcategory_index) + ". " + subcategory_name +
-               ":";
+        line = to_string(current_subcategory_index) + ". " + subcategory_name;
         file_contents.push_back(line);
         subcategories.push_back(line);
         subcategories_line_numbers.push_back(current_line_number);
@@ -161,24 +159,54 @@ bool category_viewer(string category) {
         continue;
       }
     }
+    bool running = true;
+    view_sub_categories(subcategories);
+    while (running) {
+      sub_category_options();
+      string choice;
+      cin >> choice;
 
-    cout << "\nOptions: \n"
-         << "1-x[view that category]\n"
-         << "v[view entire file]\n"
-         << "r[rename a sub-category]\n"
-         << "q[quit to main menu]\n"
-         << "Choice: ";
-    string choice;
-    cin >> choice;
-
-    if (choice == "v" || "V" || "view" || "View") {
-      for (string line : file_contents) {
-        cout << line << endl;
+      if (choice == "v" || choice == "V" || choice == "view" ||
+          choice == "View") {
+        view_entire_category_file(file_contents);
+      }
+      if (choice == "vs" || choice == "VS") {
+        view_sub_categories(subcategories);
+      }
+      if (choice == "c" || choice == "C" || choice == "create" ||
+          choice == "Create") {
+      }
+      if (choice == "q" || choice == "Q" || choice == "quit") {
+        return true;
       }
     }
   }
   return false;
+}
+
+void view_entire_category_file(vector<string> file_contents) {
   //
+  for (string line : file_contents) {
+    cout << line << endl;
+  }
+}
+void view_sub_categories(vector<string> subcategories) {
+  //
+  cout << endl;
+  cout << "\nSub-Categories:";
+  for (string category : subcategories) {
+    cout << "\n" << category;
+  }
+}
+void sub_category_options() {
+  cout << "\n\nOptions: \n"
+       << "1-x[view that category] || "
+       << "v[view entire file] || "
+       << "vs[view sub-categories] || "
+       << "r[rename a sub-category] || "
+       << "c[create new sub-category] || "
+       << "q[quit to main menu] || "
+       << "Choice: ";
 }
 
 void display_toc(vector<string> toc_vector) {
