@@ -26,6 +26,30 @@ I often found myself forgetting shortcuts across different applications and cons
 ## Technologies Used
 - C++
 - Standard Template Library (STL)
+---
+
+## Format/Syntax of .txt files 
+### table of content for categories (.txt)
+cat_name
+cat_name2
+cat_name3
+etc
+### Category Files (.txt)
+```txt
+___
+Sub-Category Label/Name
+---
+Short-Cut Description
+Short-Cut
+Short-Cut Description
+Short-Cut
+Short-Cut Description
+Short-Cut
+___
+Sub-Category Label/Name
+---
+```
+
 
 ---
 

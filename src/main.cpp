@@ -12,5 +12,11 @@ int main() {
   }
   // call a menu
   // picking from table of contents
-  main_menu(toc_vector);
+  bool running = true;
+  while (running) {
+    //
+    running = main_menu(toc_vector);
+    //
+    //
+  }
 }

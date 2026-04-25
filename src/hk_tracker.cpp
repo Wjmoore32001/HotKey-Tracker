@@ -49,28 +49,24 @@ vector<string> load_table_of_contents() {
   return table_of_contents_vector;
 }
 
-void main_menu(vector<string> toc_vector) {
-  bool running = true;
-  while (running) {
-    display_toc(toc_vector);
-    cout << "Enter Number to open a Category\n "
-         << "or\n"
-         << "Press 0 to edit a category name" << endl;
-    int choice;
-    cout << "Choice: ";
-    cin >> choice;
+bool main_menu(vector<string> toc_vector) {
+  display_toc(toc_vector);
+  cout << "Enter a Number to open a Category\n "
+       << "or\n"
+       << "Press 0 to Exit Program" << endl;
+  int choice;
+  cout << "Choice: ";
+  cin >> choice;
 
-    if (choice != 0) {
-      string category = toc_vector[choice - 1];
-      category_viewer(category);
-      continue;
-    } else {
-      running = false;
-    }
+  if (choice != 0) {
+    string category = toc_vector[choice - 1];
+    return category_viewer(category);
+  } else {
+    return false;
   }
 }
 
-void category_viewer(string category) {
+bool category_viewer(string category) {
   string category_file_path = "data/category/" + category + ".txt";
   ifstream category_file(category_file_path);
   if (!category_file) {
@@ -85,36 +81,51 @@ void category_viewer(string category) {
       category_file.close();
     } else {
       cout << "No, or an Invalid input was entered\n"
-           << "Table of Contents is Required\n"
-           << "Exiting Program" << endl;
-      return;
+           << "Returning to Main Menu\n";
+      return true;
+      ;
     }
   }
   if (category_file) {
     cout << "\nCategory File Found\n\n";
-    cout << "---------------------------------\n";
-    cout << category << " Short-Cuts: " << endl;
-    cout << "---------------------------------\n";
+    cout << "______________________________________\n\n";
+    cout << "      " << category << " Short-Cuts: " << endl;
+    cout << "______________________________________";
     int subcategory_toc_index = 0;
     int subcategory_toc_line_number = 0;
     vector<string> subcategories;
     vector<int> subcategories_line_numbers;
     vector<string> file_contents;
     string line;
+    string subcategory_name;
+    string shortcut_desc;
+    string shortcut;
     bool subcategory_flag = false;
     // true is for desc
     // false is for shortcut
     bool desc_vs_shortcut_flag = true;
     int current_line_number = 0;
     int toc_index_subcategories = 0;
+    int current_subcategory_index = 0;
+    int shortcut_index = 1;
     while (getline(category_file, line)) {
       if (line == "___") {
+        file_contents.push_back("");
+        file_contents.push_back("");
+        current_line_number++;
+        current_line_number++;
+        line = "|===================================";
         file_contents.push_back(line);
         subcategory_flag = true;
         current_line_number++;
+        current_subcategory_index++;
+        shortcut_index = 1;
         continue;
       }
       if (subcategory_flag == true && line != "---") {
+        subcategory_name = line;
+        line = to_string(current_subcategory_index) + ". " + subcategory_name +
+               ":";
         file_contents.push_back(line);
         subcategories.push_back(line);
         subcategories_line_numbers.push_back(current_line_number);
@@ -122,6 +133,7 @@ void category_viewer(string category) {
         continue;
       }
       if (line == "---") {
+        line = "|===================================";
         file_contents.push_back(line);
         subcategory_flag = false;
         desc_vs_shortcut_flag = true;
@@ -129,23 +141,43 @@ void category_viewer(string category) {
         continue;
       }
       if (desc_vs_shortcut_flag == true) {
+        shortcut_desc = line;
+        line = to_string(current_subcategory_index) + "." +
+               to_string(shortcut_index) + "-|| " + shortcut_desc + " ||-";
+        shortcut_index++;
         file_contents.push_back(line);
-        cout << "-|| " << line << " ||-" << endl;
         desc_vs_shortcut_flag = false;
         current_line_number++;
         continue;
       }
       if (desc_vs_shortcut_flag == false) {
+        shortcut = line;
+        line = "-----> " + shortcut;
         file_contents.push_back(line);
-        cout << "--> " << line << endl;
-        cout << "\n";
+        line = "------------------------------------";
+        file_contents.push_back(line);
         desc_vs_shortcut_flag = true;
         current_line_number++;
         continue;
       }
     }
-    category_file.close();
+
+    cout << "\nOptions: \n"
+         << "1-x[view that category]\n"
+         << "v[view entire file]\n"
+         << "r[rename a sub-category]\n"
+         << "q[quit to main menu]\n"
+         << "Choice: ";
+    string choice;
+    cin >> choice;
+
+    if (choice == "v" || "V" || "view" || "View") {
+      for (string line : file_contents) {
+        cout << line << endl;
+      }
+    }
   }
+  return false;
   //
 }
 
