@@ -1,19 +1,36 @@
+
+
 |===================================
-1. NeoTree: 
+1. NeoTree
 |===================================
 1.1-|| Show Hidden Files ||-
 -----> shift (hold)+ h (H)
 ------------------------------------
-1.2-|| Show Hidden Files ||-
------> shift (hold)+ h (H)
+1.2-|| Go Up a Directory Level ||-
+-----> BackSpace
+------------------------------------
+1.3-|| Go to Directory of Highlighted Directory/File ||-
+-----> . (period)
+------------------------------------
 
 
-|-----------------------------------
-2. Spell Check: 
-|-----------------------------------
+|===================================
+2. Spell Check
+|===================================
 2.1-|| Add to Dictionary ||-
 -----> z + g
-
+------------------------------------
 2.2-|| Spelling Suggestions ||-
 -----> z + =
+------------------------------------
+
+
+vector<string> file_contents;
+vector<string> subcategories;
+
+// in sub category toc 
+// #order to subcategory line number
+// 0 = NeoTree     --> Index in file_contents
+// 1 = Spell Check --> Index in file_contents
+vector<int> subcategories_line_numbers;
 

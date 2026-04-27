@@ -1,3 +1,4 @@
+$
 ___
 NeoTree
 ---
@@ -7,6 +8,7 @@ Go Up a Directory Level
 BackSpace
 Go to Directory of Highlighted Directory/File
 . (period)
+$
 ___
 Spell Check
 ---
@@ -14,3 +16,4 @@ Add to Dictionary
 z + g
 Spelling Suggestions
 z + =
+$
